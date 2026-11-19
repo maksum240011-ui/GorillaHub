@@ -1,10 +1,5 @@
---[[
-    Created by sozokier
-    Verified by sozokier
-]]
-
+-- Created by sozokier | Verified by sozokier
 local P, R, V = game:GetService("Players"), game:GetService("RunService"), game:GetService("VirtualUser")
-local TS = game:GetService("TweenService")
 local lp = P.LocalPlayer
 local pg = lp:WaitForChild("PlayerGui")
 
@@ -13,24 +8,8 @@ pcall(function() R:Set3dRenderingEnabled(true) end)
 
 local KEY, lang = "0011011110", "RU"
 local T = {
-	RU = {
-		load = "Загрузка Gorilla Hub PRO...",
-		t = "Авторизация",
-		s = "Создал и проверил: sozokier",
-		p = "Введите пароль...",
-		b = "Проверить",
-		e = "Неверный пароль!",
-		o = "Добро пожаловать, " .. lp.Name .. "!"
-	},
-	EN = {
-		load = "Loading Gorilla Hub PRO...",
-		t = "Authorization",
-		s = "Created & Verified: sozokier",
-		p = "Enter password...",
-		b = "Check",
-		e = "Wrong password!",
-		o = "Welcome, " .. lp.Name .. "!"
-	}
+	RU = {t = "Авторизация", s = "Создал и проверил: sozokier", p = "Введите пароль...", b = "Проверить", e = "Неверный пароль!", o = "Добро пожаловать, " .. lp.Name .. "!"},
+	EN = {t = "Authorization", s = "Created & Verified: sozokier", p = "Enter password...", b = "Check", e = "Wrong password!", o = "Welcome, " .. lp.Name .. "!"}
 }
 
 local gui = Instance.new("ScreenGui", pg)
@@ -78,7 +57,6 @@ end
 local OFF, ON = Color3.fromRGB(28, 31, 44), Color3.fromRGB(20, 135, 85)
 local OFF_S, ON_S = Color3.fromRGB(55, 60, 80), Color3.fromRGB(50, 255, 160)
 
--- 3. Основной хаб
 local function startHub()
 	local tpOn, afOn, akOn, r3dOn, onlyT, min = false, true, true, true, false, false
 	local tName, dist, delay, loops = "", 0, 0.1, {}
@@ -214,7 +192,6 @@ local function startHub()
 	end)
 end
 
--- 2. Окно авторизации
 local function showAuth()
 	local auth = mk("Frame", gui, UDim2.new(0, 296, 0, 192), UDim2.new(0.5, -148, 0.5, -96), Color3.fromRGB(16, 18, 25))
 	auth.Active = true
@@ -238,4 +215,13 @@ local function showAuth()
 	st(keyBox, 8, Color3.fromRGB(65, 72, 95), 1.2)
 
 	local stLbl = mk("TextLabel", auth, UDim2.new(1, -24, 0, 18), UDim2.new(0, 12, 0, 106), nil, "", Color3.fromRGB(255, 85, 95), 12)
+	local loginB = mk("TextButton", auth, UDim2.new(1, -24, 0, 40), UDim2.new(0, 12, 0, 130), Color3.fromRGB(20, 135, 85), T[lang].b, nil, 14)
+	st(loginB, 8, ON_S, 1.2)
 
+	local function setLang(l)
+		lang = l
+		aTitle.Text = T[lang].t
+		aSub.Text = T[lang].s
+		keyBox.PlaceholderText = T[lang].p
+
+		
